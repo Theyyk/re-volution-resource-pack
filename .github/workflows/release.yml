@@ -19,12 +19,79 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Validate resource pack
+      - name: Validate resource pack metadata
         shell: bash
         run: |
           test -f pack.mcmeta
-          test -d assets/customguimod
+          test -f VERSION
+          test -d assets/customguimod/textures/gui/runes
+          test -d variants/64x64/assets/customguimod/textures/gui/runes
           grep -Eq '"pack_format"[[:space:]]*:[[:space:]]*3' pack.mcmeta
+
+      - name: Validate rune variants
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import struct
+
+          names = [
+              "toxin_booster.png",
+              "hidden_strike_glove.png",
+              "hunter_relic.png",
+              "infection_mark.png",
+              "infection_seal.png",
+              "killer_cloak.png",
+              "killer_dagger.png",
+              "rage_amulet.png",
+              "sharpening_stone.png",
+              "snake_fang.png",
+              "toxic_shard.png",
+          ]
+
+          variants = {
+              128: Path("assets/customguimod/textures/gui/runes"),
+              64: Path("variants/64x64/assets/customguimod/textures/gui/runes"),
+          }
+
+          for expected_size, directory in variants.items():
+              actual = sorted(p.name for p in directory.glob("*.png"))
+              if actual != sorted(names):
+                  raise SystemExit(
+                      f"{directory}: expected exactly 11 rune PNGs, got {actual}"
+                  )
+
+              for name in names:
+                  path = directory / name
+                  with path.open("rb") as fh:
+                      signature = fh.read(8)
+                      if signature != b"\x89PNG\r\n\x1a\n":
+                          raise SystemExit(f"{path}: invalid PNG signature")
+
+                      length = struct.unpack(">I", fh.read(4))[0]
+                      chunk = fh.read(4)
+                      if chunk != b"IHDR" or length != 13:
+                          raise SystemExit(f"{path}: invalid PNG IHDR")
+
+                      width, height, bit_depth, color_type, _, _, _ = struct.unpack(
+                          ">IIBBBBB", fh.read(13)
+                      )
+
+                  if (width, height) != (expected_size, expected_size):
+                      raise SystemExit(
+                          f"{path}: expected {expected_size}x{expected_size}, got {width}x{height}"
+                      )
+                  if color_type != 6:
+                      raise SystemExit(
+                          f"{path}: expected RGBA PNG (color type 6), got {color_type}"
+                      )
+                  if bit_depth != 8:
+                      raise SystemExit(
+                          f"{path}: expected 8-bit channels, got bit depth {bit_depth}"
+                      )
+
+              print(f"Validated {expected_size}x{expected_size}: 11 RGBA rune PNGs")
+          PY
 
       - name: Validate tag version
         if: startsWith(github.ref, 'refs/tags/')
@@ -46,22 +113,70 @@ jobs:
             exit 1
           fi
 
-      - name: Build resource pack ZIP
+      - name: Build 128x128 resource pack ZIP
         shell: bash
         run: |
-          ARCHIVE="re-volution-resource-pack-${GITHUB_REF_NAME}.zip"
-          FILES=(pack.mcmeta assets)
+          PROJECT_VERSION=$(tr -d '\r\n' < VERSION)
+          ARCHIVE_128="re-volution-resource-pack-v${PROJECT_VERSION}-128x128.zip"
+          rm -rf build/128x128
+          mkdir -p build/128x128
+          cp pack.mcmeta build/128x128/
+          cp -R assets build/128x128/
           if [ -f pack.png ]; then
-            FILES+=(pack.png)
+            cp pack.png build/128x128/
           fi
-          zip -r "${ARCHIVE}" "${FILES[@]}"
-          echo "ARCHIVE=${ARCHIVE}" >> "$GITHUB_ENV"
+          (
+            cd build/128x128
+            zip -r "../../${ARCHIVE_128}" pack.mcmeta assets $([ -f pack.png ] && echo pack.png)
+          )
+          echo "ARCHIVE_128=${ARCHIVE_128}" >> "$GITHUB_ENV"
 
-      - name: Upload build artifact
+      - name: Build 64x64 resource pack ZIP
+        shell: bash
+        run: |
+          PROJECT_VERSION=$(tr -d '\r\n' < VERSION)
+          ARCHIVE_64="re-volution-resource-pack-v${PROJECT_VERSION}-64x64.zip"
+          rm -rf build/64x64
+          mkdir -p build/64x64
+          cp pack.mcmeta build/64x64/
+          cp -R assets build/64x64/
+          cp -R variants/64x64/assets/. build/64x64/assets/
+          if [ -f pack.png ]; then
+            cp pack.png build/64x64/
+          fi
+          (
+            cd build/64x64
+            zip -r "../../${ARCHIVE_64}" pack.mcmeta assets $([ -f pack.png ] && echo pack.png)
+          )
+          echo "ARCHIVE_64=${ARCHIVE_64}" >> "$GITHUB_ENV"
+
+      - name: Verify ZIP roots
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os
+          import zipfile
+
+          for key in ("ARCHIVE_64", "ARCHIVE_128"):
+              archive = os.environ[key]
+              with zipfile.ZipFile(archive) as zf:
+                  names = zf.namelist()
+                  if "pack.mcmeta" not in names:
+                      raise SystemExit(f"{archive}: pack.mcmeta is not at ZIP root")
+                  if not any(name.startswith("assets/") for name in names):
+                      raise SystemExit(f"{archive}: assets/ missing from ZIP root")
+                  if any(name.startswith("build/") for name in names):
+                      raise SystemExit(f"{archive}: build/ leaked into ZIP")
+              print(f"Verified ZIP root: {archive}")
+          PY
+
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: re-volution-resource-pack-${{ github.ref_name }}
-          path: ${{ env.ARCHIVE }}
+          path: |
+            ${{ env.ARCHIVE_64 }}
+            ${{ env.ARCHIVE_128 }}
           if-no-files-found: error
 
       - name: Create GitHub Release
@@ -70,6 +185,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
-          gh release create "${GITHUB_REF_NAME}" "${ARCHIVE}" \
+          gh release create "${GITHUB_REF_NAME}" \
+            "${ARCHIVE_64}" \
+            "${ARCHIVE_128}" \
             --title "RE:volution Resource Pack ${GITHUB_REF_NAME}" \
             --generate-notes
