@@ -127,7 +127,11 @@ jobs:
           fi
           (
             cd build/128x128
-            zip -r "../../${ARCHIVE_128}" pack.mcmeta assets $([ -f pack.png ] && echo pack.png)
+            FILES=(pack.mcmeta assets)
+            if [ -f pack.png ]; then
+              FILES+=(pack.png)
+            fi
+            zip -r "../../${ARCHIVE_128}" "${FILES[@]}"
           )
           echo "ARCHIVE_128=${ARCHIVE_128}" >> "$GITHUB_ENV"
 
@@ -146,7 +150,11 @@ jobs:
           fi
           (
             cd build/64x64
-            zip -r "../../${ARCHIVE_64}" pack.mcmeta assets $([ -f pack.png ] && echo pack.png)
+            FILES=(pack.mcmeta assets)
+            if [ -f pack.png ]; then
+              FILES+=(pack.png)
+            fi
+            zip -r "../../${ARCHIVE_64}" "${FILES[@]}"
           )
           echo "ARCHIVE_64=${ARCHIVE_64}" >> "$GITHUB_ENV"
 
