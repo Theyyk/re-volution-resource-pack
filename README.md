@@ -62,13 +62,19 @@
 
 ### Скриншоты интеграции
 
-Resource pack используется тем же GUI, который развивается в основном моде RE:volution.
+Актуальные скриншоты хранятся прямо в этом репозитории и показывают текущий набор рун статуса **Яд** с resource-pack текстурами.
 
-![Заполненная коллекция рун](https://raw.githubusercontent.com/Theyyk/re-volution-mod/main/screenshots/gui-v1.1.1-runes-full.png)
+#### Полный интерфейс
 
-![Покупка рун](https://raw.githubusercontent.com/Theyyk/re-volution-mod/main/screenshots/gui-v1.1.1-runes-purchase.png)
+![Полный интерфейс с рунами Яда](screenshots/gui-poison-runes-full.png)
 
-![Компактный GUI](https://raw.githubusercontent.com/Theyyk/re-volution-mod/main/screenshots/gui-v1.1.1-compact.png)
+#### Широкий интерфейс
+
+![Широкий интерфейс с рунами Яда](screenshots/gui-poison-runes-wide.png)
+
+#### Компактный интерфейс
+
+![Компактный интерфейс с рунами Яда](screenshots/gui-poison-runes-compact.png)
 
 ---
 
@@ -85,6 +91,10 @@ re-volution-resource-pack/
 │        └─ gui/
 │           └─ runes/
 ├─ docs/
+├─ screenshots/
+│  ├─ gui-poison-runes-full.png
+│  ├─ gui-poison-runes-wide.png
+│  └─ gui-poison-runes-compact.png
 ├─ tools/
 │  └─ resize-runes.ps1
 ├─ LICENSE
