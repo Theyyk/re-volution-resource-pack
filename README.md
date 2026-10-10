@@ -83,11 +83,23 @@ Resource pack использует namespace `customguimod`, поэтому мо
 
 ---
 
-## Screenshot
+## Скриншоты
 
-Текущий public GUI с resource pack `v1.1.0` и mod `v1.1.3`:
+Актуальный GUI с **RE:volution Resource Pack v1.1.0** и **RE:volution Mod v1.1.4**. Скриншоты одновременно показывают текущую компоновку интерфейса и rune-текстуры, которые предоставляет resource pack.
 
-![RE:volution GUI](screenshots/gui-poison-runes-full.png)
+### Full
+
+![RE:volution GUI v1.1.4 — full](screenshots/gui-v1.1.4-full.png)
+
+### Wide
+
+![RE:volution GUI v1.1.4 — wide](screenshots/gui-v1.1.4-wide.png)
+
+### Compact
+
+![RE:volution GUI v1.1.4 — compact](screenshots/gui-v1.1.4-compact.png)
+
+Resource pack отвечает за визуальные PNG-ресурсы рун. Геометрия слотов, layout, состояния и поведение GUI определяются основным модом.
 
 ---
 
