@@ -1,48 +1,65 @@
-# RE:volution Resource Pack — Minecraft 1.12.2
+﻿# RE:volution Resource Pack — Minecraft 1.12.2
 
-Ресурс-пак для игрового режима **RE:volution**, содержащий визуальные ассеты интерфейса и рун отдельно от кода основного Forge-мода.
+Resource pack для игрового режима **RE:volution**.
 
-Пак использует тот же namespace `customguimod`, поэтому мод обращается к текстурам через обычные `ResourceLocation`, а Minecraft подменяет их ресурсами из подключённого resource pack.
+Он содержит визуальные ресурсы интерфейса и рун отдельно от Java-кода основного Forge-мода.
 
-**Текущая версия: `v1.0.0`**
+Resource pack использует namespace `customguimod`, поэтому мод обращается к текстурам через стандартные `ResourceLocation`, а Minecraft загружает соответствующие PNG из подключённого resource pack.
 
----
-
-## 🎯 Что реализовано
-
-- отдельный репозиторий для визуальных ассетов RE:volution;
-- совместимость с Minecraft 1.12.2 и `pack_format: 3`;
-- набор из **11 уникальных текстур рун** для статуса **Яд**;
-- единый формат игровых иконок `128x128`;
-- прозрачный фон PNG;
-- оптимизация исходных изображений без изменения игровых размеров отображения;
-- автоматическая проверка структуры resource pack через GitHub Actions;
-- автоматическая сборка готового ZIP;
-- автоматическое создание GitHub Release по тегам `v*`;
-- отдельные ветки `main`, `develop` и `feature/*` по той же схеме, что и у основного мода.
+**Текущая версия: `v1.1.0`**
 
 ---
 
-## 🛠️ Совместимость
+## Что реализовано
 
-| Компонент | Значение |
+- Minecraft **1.12.2**;
+- `pack_format: 3`;
+- namespace `customguimod`;
+- **11 уникальных rune-текстур** для первого статуса **Яд**;
+- две версии resource pack: **64×64** и **128×128**;
+- одинаковые namespace и имена файлов в обоих вариантах;
+- RGBA PNG с 8-bit каналами;
+- автоматическая проверка структуры через GitHub Actions;
+- автоматическая сборка двух ZIP;
+- автоматическое создание GitHub Release по тегам `v*`.
+
+---
+
+## Совместимость
+
+| Компонент | Версия |
 |---|---|
-| Minecraft | 1.12.2 |
-| Forge | 1.12.2 |
-| Resource pack format | 3 |
+| Minecraft | `1.12.2` |
+| Forge | `14.23.5.2859` |
+| RE:volution Mod | `v1.1.3` |
+| RE:volution Resource Pack | `v1.1.0` |
+| Resource pack format | `3` |
 | Namespace | `customguimod` |
-| Формат изображений | PNG |
-| Размер игровых иконок рун | `128x128` |
 
-Основной проект: [re-volution-mod](https://github.com/Theyyk/re-volution-mod)
+Основной мод: https://github.com/Theyyk/re-volution-mod
+
+Совместимый release мода: https://github.com/Theyyk/re-volution-mod/releases/tag/v1.1.3
 
 ---
 
-## ✨ Руны и GUI
+## Варианты 64×64 и 128×128
 
-Текстуры рун хранятся отдельно от Java-кода и загружаются Minecraft через стандартную систему ресурсов.
+В release `v1.1.0` доступны два варианта:
 
-Текущий набор содержит 11 уникальных изображений, которые используются 26 фиксированными позициями рун в основном моде.
+- `re-volution-resource-pack-v1.1.0-64x64.zip`
+- `re-volution-resource-pack-v1.1.0-128x128.zip`
+
+Оба варианта используют одинаковые resource paths и одинаковые имена rune-текстур.
+
+В Minecraft следует включать **один** вариант pack. Если одновременно включены оба, вариант с более высоким приоритетом перекроет те же resource paths второго.
+
+Размер PNG не определяет размер rune-slot в GUI. Геометрия интерфейса задаётся модом.
+
+---
+
+## Руны
+
+Текущий набор содержит **11 уникальных изображений**, которые используются 26 фиксированными позициями рун первого статуса **Яд**.
 
 | Файл | Руна | Тип |
 |---|---|---|
@@ -58,201 +75,114 @@
 | `infection_mark.png` | Метка заражения | Яд |
 | `hunter_relic.png` | Реликвия охотника | Ресурс |
 
-Визуальный стиль набора: тёмные серые и чёрные оттенки, приглушённый зелёный, серебро и редкие золотистые акценты. Иконка отвечает только за основной предмет; ранг, тип и состояние слота рисуются интерфейсом отдельно.
+Основной resource path:
 
-### Скриншоты интеграции
+`customguimod:textures/gui/runes/<name>.png`
 
-Актуальные скриншоты хранятся прямо в этом репозитории и показывают текущий набор рун статуса **Яд** с resource-pack текстурами.
-
-#### Полный интерфейс
-
-![Полный интерфейс с рунами Яда](screenshots/gui-poison-runes-full.png)
-
-#### Широкий интерфейс
-
-![Широкий интерфейс с рунами Яда](screenshots/gui-poison-runes-wide.png)
-
-#### Компактный интерфейс
-
-![Компактный интерфейс с рунами Яда](screenshots/gui-poison-runes-compact.png)
+Одинаковое изображение в нескольких позициях GUI не означает одну и ту же rune-запись. Идентичность и состояние рун определяются модом, а resource pack предоставляет визуальные ресурсы.
 
 ---
 
-## 📁 Структура
+## Screenshot
 
-```text
-re-volution-resource-pack/
-├─ .github/
-│  └─ workflows/
-│     └─ release.yml
-├─ assets/
-│  └─ customguimod/
-│     └─ textures/
-│        └─ gui/
-│           └─ runes/
-├─ docs/
-├─ screenshots/
-│  ├─ gui-poison-runes-full.png
-│  ├─ gui-poison-runes-wide.png
-│  └─ gui-poison-runes-compact.png
-├─ tools/
-│  └─ resize-runes.ps1
-├─ LICENSE
-├─ README.md
-├─ VERSION
-└─ pack.mcmeta
-```
+Текущий public GUI с resource pack `v1.1.0` и mod `v1.1.3`:
 
-Текущие rune-ассеты находятся в:
-
-```text
-assets/customguimod/textures/gui/runes/
-```
-
-По мере развития GUI сюда планируется вынести и другие визуальные категории:
-
-```text
-ranks/
-status/
-types/
-buttons/
-backgrounds/
-```
+![RE:volution GUI](screenshots/gui-poison-runes-full.png)
 
 ---
 
-## 🧩 Разделение мода и resource pack
+## Структура
 
-Архитектура проекта разделяет игровую логику и визуалы.
+- `.github/workflows/release.yml`
+- `assets/customguimod/textures/gui/runes/` — вариант 128×128
+- `variants/64x64/assets/customguimod/textures/gui/runes/` — вариант 64×64
+- `screenshots/gui-poison-runes-full.png`
+- `tools/resize-runes.ps1`
+- `LICENSE`
+- `README.md`
+- `VERSION`
+- `pack.mcmeta`
 
-```text
-re-volution-mod
-├─ Java-логика
-├─ GUI-логика
-├─ состояние игрока
-├─ сеть
-├─ MongoDB
-└─ ResourceLocation
-        ↓
-re-volution-resource-pack
-└─ PNG-текстуры
-```
+При сборке 64×64 ZIP workflow создаёт обычную структуру `assets/`, после чего заменяет rune-текстуры содержимым `variants/64x64`.
 
-Мод не должен декодировать PNG вручную во время рендера. Minecraft TextureManager отвечает за загрузку текстур, а клиентский preloader заранее прогревает используемые rune-текстуры после загрузки ресурсов.
+В итоговом ZIP директории `variants/` нет.
 
 ---
 
-## ⚡ Оптимизация изображений
+## Установка
 
-Первоначальные rune-ассеты были значительно больше необходимого игрового разрешения.
-
-После нормализации всех 11 файлов до `128x128` общий размер набора уменьшился примерно:
-
-```text
-12.1 MiB -> 0.27 MiB
-```
-
-Экономия составляет около **97.7%**.
-
-Для повторной нормализации используется:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File ".\tools\resize-runes.ps1"
-```
-
-Изменённые изображения всегда следует визуально проверять в Minecraft перед релизом.
+1. Установите совместимый **RE:volution Mod v1.1.3**.
+2. Скачайте **один** архив:
+   - `re-volution-resource-pack-v1.1.0-64x64.zip`
+   - или `re-volution-resource-pack-v1.1.0-128x128.zip`
+3. Поместите ZIP в `.minecraft/resourcepacks/` используемого Minecraft-профиля.
+4. Включите pack в настройках ресурсов Minecraft.
+5. Проверьте, что другой resource pack выше по приоритету не перекрывает namespace `customguimod`.
+6. Проверьте GUI, текстуры и resource reload.
 
 ---
 
-## 📥 Установка
+## GitHub Actions
 
-1. Откройте раздел [Releases](https://github.com/Theyyk/re-volution-resource-pack/releases).
-2. Скачайте архив вида `re-volution-resource-pack-vX.Y.Z.zip`.
-3. Поместите ZIP в папку Minecraft:
+Workflow `.github/workflows/release.yml` запускается при:
 
-```text
-.minecraft/resourcepacks/
-```
+- push в `develop`;
+- push тега `v*`;
+- `workflow_dispatch`.
 
-4. Включите **RE:volution Resource Pack** в настройках ресурсов Minecraft.
+Feature-ветки resource pack автоматически workflow не запускают.
 
-Для разработки можно также использовать распакованную папку resource pack.
-
----
-
-## 📦 Сборка и релизы
-
-GitHub Actions проверяет:
+Workflow проверяет:
 
 - наличие `pack.mcmeta`;
-- наличие namespace `assets/customguimod`;
+- наличие `VERSION`;
+- обе директории rune-текстур;
 - `pack_format: 3`;
-- соответствие тега значению из `VERSION` для релизных запусков.
+- ровно 11 PNG в каждом варианте;
+- PNG signature;
+- IHDR;
+- размер 128×128 и 64×64;
+- RGBA color type 6;
+- bit depth 8;
+- соответствие Git tag значению `VERSION` для tag build.
 
-Для каждого запуска workflow собирается ZIP, в корне которого находятся:
+После проверки создаются:
 
-```text
-pack.mcmeta
-assets/
-```
+- `re-volution-resource-pack-vX.Y.Z-64x64.zip`
+- `re-volution-resource-pack-vX.Y.Z-128x128.zip`
 
-Если существует `pack.png`, он также автоматически включается в архив.
-
-При push тега вида:
-
-```text
-v1.0.0
-```
-
-workflow автоматически создаёт GitHub Release и прикладывает готовый ZIP.
+Также проверяется, что `pack.mcmeta` и `assets/` находятся в корне ZIP, а `build/` внутрь архива не попадает.
 
 ---
 
-## 🌿 Ветки
+## Ветки
 
-Используется та же модель разработки, что и в основном моде:
-
-```text
-main       стабильные релизы
-develop    интеграционная разработка
-feature/*  отдельные задачи
-```
-
-Релизный тег ставится только на проверенное состояние `main`.
+`feature/* → develop → main → vX.Y.Z → GitHub Release`
 
 ---
 
-## 📌 Версии
+## Версии
+
+### v1.1.0
+
+- добавлен вариант **64×64**;
+- сохранён вариант **128×128**;
+- оба варианта содержат одинаковые 11 rune-текстур;
+- workflow проверяет оба разрешения;
+- workflow собирает два отдельных ZIP;
+- resource pack совместим с **RE:volution Mod v1.1.3**.
 
 ### v1.0.0
 
-Первый публичный релиз resource pack:
+Первый публичный release resource pack:
 
 - 11 уникальных rune-текстур;
-- визуальный набор статуса Яд;
-- нормализация изображений до `128x128`;
-- уменьшение размера набора примерно на 97.7%;
-- автоматическая сборка ZIP;
-- автоматические GitHub Releases;
-- ветки `main`, `develop` и `feature/*`.
+- PNG 128×128;
+- автоматическая ZIP-сборка;
+- GitHub Releases.
 
 ---
 
-## 🗺️ Дальнейшее развитие
+## Лицензия
 
-Планируется постепенно вынести из мода оставшиеся чисто визуальные элементы GUI:
-
-- рамки рангов;
-- значки статусов;
-- значки типов;
-- кнопки;
-- фоны и панели;
-- дополнительные UI-атласы.
-
-Игровая логика, состояние и сетевой код при этом остаются в [re-volution-mod](https://github.com/Theyyk/re-volution-mod).
-
----
-
-## 📄 Лицензия
-
-Проект распространяется по лицензии MIT. Подробности находятся в файле [LICENSE](LICENSE).
+Проект распространяется по лицензии, указанной в `LICENSE`.
