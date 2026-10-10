@@ -1,4 +1,4 @@
-﻿# RE:volution Resource Pack — Minecraft 1.12.2
+# RE:volution Resource Pack — Minecraft 1.12.2
 
 Resource pack для игрового режима **RE:volution**.
 
@@ -31,14 +31,14 @@ Resource pack использует namespace `customguimod`, поэтому мо
 |---|---|
 | Minecraft | `1.12.2` |
 | Forge | `14.23.5.2859` |
-| RE:volution Mod | `v1.1.3` |
+| RE:volution Mod | `v1.1.4` |
 | RE:volution Resource Pack | `v1.1.0` |
 | Resource pack format | `3` |
 | Namespace | `customguimod` |
 
 Основной мод: https://github.com/Theyyk/re-volution-mod
 
-Совместимый release мода: https://github.com/Theyyk/re-volution-mod/releases/tag/v1.1.3
+Совместимый release мода: https://github.com/Theyyk/re-volution-mod/releases/tag/v1.1.4
 
 ---
 
@@ -96,7 +96,9 @@ Resource pack использует namespace `customguimod`, поэтому мо
 - `.github/workflows/release.yml`
 - `assets/customguimod/textures/gui/runes/` — вариант 128×128
 - `variants/64x64/assets/customguimod/textures/gui/runes/` — вариант 64×64
-- `screenshots/gui-poison-runes-full.png`
+- `screenshots/gui-v1.1.4-full.png`
+- `screenshots/gui-v1.1.4-wide.png`
+- `screenshots/gui-v1.1.4-compact.png`
 - `tools/resize-runes.ps1`
 - `LICENSE`
 - `README.md`
@@ -111,7 +113,7 @@ Resource pack использует namespace `customguimod`, поэтому мо
 
 ## Установка
 
-1. Установите совместимый **RE:volution Mod v1.1.3**.
+1. Установите совместимый **RE:volution Mod v1.1.4**.
 2. Скачайте **один** архив:
    - `re-volution-resource-pack-v1.1.0-64x64.zip`
    - или `re-volution-resource-pack-v1.1.0-128x128.zip`
@@ -170,7 +172,7 @@ Workflow проверяет:
 - оба варианта содержат одинаковые 11 rune-текстур;
 - workflow проверяет оба разрешения;
 - workflow собирает два отдельных ZIP;
-- resource pack совместим с **RE:volution Mod v1.1.3**.
+- resource pack совместим с **RE:volution Mod v1.1.4**.
 
 ### v1.0.0
 
