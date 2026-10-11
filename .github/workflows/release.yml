@@ -113,6 +113,12 @@ jobs:
             exit 1
           fi
 
+      - name: Validate release descriptions
+        shell: bash
+        run: |
+          PROJECT_VERSION=$(tr -d '\r\n' < VERSION)
+          python3 .github/scripts/check-release-notes.py "v${PROJECT_VERSION}"
+
       - name: Build 128x128 resource pack ZIP
         shell: bash
         run: |
@@ -197,4 +203,4 @@ jobs:
             "${ARCHIVE_64}" \
             "${ARCHIVE_128}" \
             --title "RE:volution Resource Pack ${GITHUB_REF_NAME}" \
-            --generate-notes
+            --notes-file ".github/release-notes/${GITHUB_REF_NAME}.md"
