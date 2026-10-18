@@ -11,7 +11,7 @@
 - 11 уникальных текстур для 26 фиксированных позиций первого статуса **Яд**.
 - Два варианта: **64×64** и **128×128**, с одинаковыми именами файлов и путями ресурсов.
 - Прозрачные PNG в формате RGBA с 8-битными каналами.
-- Minecraft **1.12.2**, формат набора ресурсов **3**, пространство имён `customguimod`.
+- Minecraft **1.12.2**, формат набора ресурсов **3**, пространство имён `revolution`.
 - Автоматическая проверка текстур и сборка двух ZIP-архивов.
 
 Набор содержит изображения рун. Геометрию интерфейса, ранги, состояние коллекции, покупку и пробуждение определяет основной мод.
@@ -34,33 +34,33 @@ Resource Pack предназначен для актуальной версии 
 ### 64×64
 
 <p>
-  <img src="variants/64x64/assets/customguimod/textures/gui/runes/hidden_strike_glove.png" width="64" height="64" alt="Hidden Strike Glove 64x64">
-  <img src="variants/64x64/assets/customguimod/textures/gui/runes/hunter_relic.png" width="64" height="64" alt="Hunter Relic 64x64">
-  <img src="variants/64x64/assets/customguimod/textures/gui/runes/infection_mark.png" width="64" height="64" alt="Infection Mark 64x64">
-  <img src="variants/64x64/assets/customguimod/textures/gui/runes/infection_seal.png" width="64" height="64" alt="Infection Seal 64x64">
-  <img src="variants/64x64/assets/customguimod/textures/gui/runes/killer_cloak.png" width="64" height="64" alt="Killer Cloak 64x64">
-  <img src="variants/64x64/assets/customguimod/textures/gui/runes/killer_dagger.png" width="64" height="64" alt="Killer Dagger 64x64">
-  <img src="variants/64x64/assets/customguimod/textures/gui/runes/rage_amulet.png" width="64" height="64" alt="Rage Amulet 64x64">
-  <img src="variants/64x64/assets/customguimod/textures/gui/runes/sharpening_stone.png" width="64" height="64" alt="Sharpening Stone 64x64">
-  <img src="variants/64x64/assets/customguimod/textures/gui/runes/snake_fang.png" width="64" height="64" alt="Snake Fang 64x64">
-  <img src="variants/64x64/assets/customguimod/textures/gui/runes/toxic_shard.png" width="64" height="64" alt="Toxic Shard 64x64">
-  <img src="variants/64x64/assets/customguimod/textures/gui/runes/toxin_booster.png" width="64" height="64" alt="Toxin Booster 64x64">
+  <img src="variants/64x64/assets/revolution/textures/gui/runes/hidden_strike_glove.png" width="64" height="64" alt="Hidden Strike Glove 64x64">
+  <img src="variants/64x64/assets/revolution/textures/gui/runes/hunter_relic.png" width="64" height="64" alt="Hunter Relic 64x64">
+  <img src="variants/64x64/assets/revolution/textures/gui/runes/infection_mark.png" width="64" height="64" alt="Infection Mark 64x64">
+  <img src="variants/64x64/assets/revolution/textures/gui/runes/infection_seal.png" width="64" height="64" alt="Infection Seal 64x64">
+  <img src="variants/64x64/assets/revolution/textures/gui/runes/killer_cloak.png" width="64" height="64" alt="Killer Cloak 64x64">
+  <img src="variants/64x64/assets/revolution/textures/gui/runes/killer_dagger.png" width="64" height="64" alt="Killer Dagger 64x64">
+  <img src="variants/64x64/assets/revolution/textures/gui/runes/rage_amulet.png" width="64" height="64" alt="Rage Amulet 64x64">
+  <img src="variants/64x64/assets/revolution/textures/gui/runes/sharpening_stone.png" width="64" height="64" alt="Sharpening Stone 64x64">
+  <img src="variants/64x64/assets/revolution/textures/gui/runes/snake_fang.png" width="64" height="64" alt="Snake Fang 64x64">
+  <img src="variants/64x64/assets/revolution/textures/gui/runes/toxic_shard.png" width="64" height="64" alt="Toxic Shard 64x64">
+  <img src="variants/64x64/assets/revolution/textures/gui/runes/toxin_booster.png" width="64" height="64" alt="Toxin Booster 64x64">
 </p>
 
 ### 128×128
 
 <p>
-  <img src="assets/customguimod/textures/gui/runes/hidden_strike_glove.png" width="128" height="128" alt="Hidden Strike Glove 128x128">
-  <img src="assets/customguimod/textures/gui/runes/hunter_relic.png" width="128" height="128" alt="Hunter Relic 128x128">
-  <img src="assets/customguimod/textures/gui/runes/infection_mark.png" width="128" height="128" alt="Infection Mark 128x128">
-  <img src="assets/customguimod/textures/gui/runes/infection_seal.png" width="128" height="128" alt="Infection Seal 128x128">
-  <img src="assets/customguimod/textures/gui/runes/killer_cloak.png" width="128" height="128" alt="Killer Cloak 128x128">
-  <img src="assets/customguimod/textures/gui/runes/killer_dagger.png" width="128" height="128" alt="Killer Dagger 128x128">
-  <img src="assets/customguimod/textures/gui/runes/rage_amulet.png" width="128" height="128" alt="Rage Amulet 128x128">
-  <img src="assets/customguimod/textures/gui/runes/sharpening_stone.png" width="128" height="128" alt="Sharpening Stone 128x128">
-  <img src="assets/customguimod/textures/gui/runes/snake_fang.png" width="128" height="128" alt="Snake Fang 128x128">
-  <img src="assets/customguimod/textures/gui/runes/toxic_shard.png" width="128" height="128" alt="Toxic Shard 128x128">
-  <img src="assets/customguimod/textures/gui/runes/toxin_booster.png" width="128" height="128" alt="Toxin Booster 128x128">
+  <img src="assets/revolution/textures/gui/runes/hidden_strike_glove.png" width="128" height="128" alt="Hidden Strike Glove 128x128">
+  <img src="assets/revolution/textures/gui/runes/hunter_relic.png" width="128" height="128" alt="Hunter Relic 128x128">
+  <img src="assets/revolution/textures/gui/runes/infection_mark.png" width="128" height="128" alt="Infection Mark 128x128">
+  <img src="assets/revolution/textures/gui/runes/infection_seal.png" width="128" height="128" alt="Infection Seal 128x128">
+  <img src="assets/revolution/textures/gui/runes/killer_cloak.png" width="128" height="128" alt="Killer Cloak 128x128">
+  <img src="assets/revolution/textures/gui/runes/killer_dagger.png" width="128" height="128" alt="Killer Dagger 128x128">
+  <img src="assets/revolution/textures/gui/runes/rage_amulet.png" width="128" height="128" alt="Rage Amulet 128x128">
+  <img src="assets/revolution/textures/gui/runes/sharpening_stone.png" width="128" height="128" alt="Sharpening Stone 128x128">
+  <img src="assets/revolution/textures/gui/runes/snake_fang.png" width="128" height="128" alt="Snake Fang 128x128">
+  <img src="assets/revolution/textures/gui/runes/toxic_shard.png" width="128" height="128" alt="Toxic Shard 128x128">
+  <img src="assets/revolution/textures/gui/runes/toxin_booster.png" width="128" height="128" alt="Toxin Booster 128x128">
 </p>
 
 Исторические GUI-скриншоты сохранены в [`docs/archive/screenshots/`](docs/archive/screenshots/), но больше не используются как актуальный preview Resource Pack.
