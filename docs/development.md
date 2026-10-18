@@ -2,8 +2,8 @@
 
 ## Структура ресурсов
 
-- `assets/customguimod/textures/gui/runes/` — 128×128.
-- `variants/64x64/assets/customguimod/textures/gui/runes/` — 64×64.
+- `assets/revolution/textures/gui/runes/` — 128×128.
+- `variants/64x64/assets/revolution/textures/gui/runes/` — 64×64.
 - `pack.mcmeta` — метаданные с форматом 3.
 - `VERSION` — версия набора ресурсов.
 - `.github/workflows/release.yml` — проверка, сборка и публикация.
@@ -17,16 +17,15 @@
 Автоматизация `.github/workflows/release.yml` запускается при:
 
 - отправке изменений в `develop`;
+- отправке изменений в `feature/*`;
 - отправке тега `v*`;
 - ручном запуске `workflow_dispatch`.
-
-Отправка изменений в рабочие ветки `feature/*` не запускает сборку автоматически.
 
 Автоматизация проверяет:
 
 - наличие `pack.mcmeta`;
 - наличие `VERSION`;
-- обе директории текстур рун;
+- обе директории текстур рун в пространстве имён `revolution`;
 - `pack_format: 3`;
 - ровно 11 PNG в каждом варианте;
 - сигнатуру PNG;
@@ -34,14 +33,15 @@
 - размер 128×128 и 64×64;
 - формат RGBA (тип цвета 6);
 - 8-битные каналы;
-- соответствие тега Git значению `VERSION` для сборки по тегу.
+- соответствие тега Git значению `VERSION` для сборки по тегу;
+- отсутствие старого `assets/customguimod/` внутри собранных ZIP.
 
 После проверки создаются:
 
 - `re-volution-resource-pack-vX.Y.Z-64x64.zip`
 - `re-volution-resource-pack-vX.Y.Z-128x128.zip`
 
-Также проверяется, что `pack.mcmeta` и `assets/` находятся в корне ZIP, а `build/` внутрь архива не попадает.
+Также проверяется, что `pack.mcmeta` и `assets/revolution/` находятся в корне ZIP, а `build/` внутрь архива не попадает.
 
 ## Предпросмотр ресурсов
 
