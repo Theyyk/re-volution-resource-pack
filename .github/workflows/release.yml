@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - develop
+      - "feature/**"
     tags:
       - "v*"
   workflow_dispatch:
@@ -24,8 +25,8 @@ jobs:
         run: |
           test -f pack.mcmeta
           test -f VERSION
-          test -d assets/customguimod/textures/gui/runes
-          test -d variants/64x64/assets/customguimod/textures/gui/runes
+          test -d assets/revolution/textures/gui/runes
+          test -d variants/64x64/assets/revolution/textures/gui/runes
           grep -Eq '"pack_format"[[:space:]]*:[[:space:]]*3' pack.mcmeta
 
       - name: Validate rune variants
@@ -50,8 +51,8 @@ jobs:
           ]
 
           variants = {
-              128: Path("assets/customguimod/textures/gui/runes"),
-              64: Path("variants/64x64/assets/customguimod/textures/gui/runes"),
+              128: Path("assets/revolution/textures/gui/runes"),
+              64: Path("variants/64x64/assets/revolution/textures/gui/runes"),
           }
 
           for expected_size, directory in variants.items():
@@ -177,11 +178,13 @@ jobs:
                   names = zf.namelist()
                   if "pack.mcmeta" not in names:
                       raise SystemExit(f"{archive}: pack.mcmeta is not at ZIP root")
-                  if not any(name.startswith("assets/") for name in names):
-                      raise SystemExit(f"{archive}: assets/ missing from ZIP root")
+                  if not any(name.startswith("assets/revolution/") for name in names):
+                      raise SystemExit(f"{archive}: assets/revolution/ missing from ZIP root")
+                  if any(name.startswith("assets/customguimod/") for name in names):
+                      raise SystemExit(f"{archive}: legacy assets/customguimod/ leaked into ZIP")
                   if any(name.startswith("build/") for name in names):
                       raise SystemExit(f"{archive}: build/ leaked into ZIP")
-              print(f"Verified ZIP root: {archive}")
+              print(f"Verified ZIP root and revolution namespace: {archive}")
           PY
 
       - name: Upload build artifacts
