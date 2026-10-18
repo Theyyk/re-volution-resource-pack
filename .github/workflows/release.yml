@@ -187,10 +187,17 @@ jobs:
               print(f"Verified ZIP root and revolution namespace: {archive}")
           PY
 
+      - name: Prepare artifact name
+        id: artifact_name
+        shell: bash
+        run: |
+          SAFE_REF_NAME=$(printf '%s' "$GITHUB_REF_NAME" | sed 's/[^A-Za-z0-9._-]/-/g')
+          echo "ref=${SAFE_REF_NAME}" >> "$GITHUB_OUTPUT"
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: re-volution-resource-pack-${{ github.ref_name }}
+          name: re-volution-resource-pack-${{ steps.artifact_name.outputs.ref }}
           path: |
             ${{ env.ARCHIVE_64 }}
             ${{ env.ARCHIVE_128 }}
