@@ -38,14 +38,14 @@
 Текущая структура:
 
 ```text
-assets/customguimod/textures/gui/runes/                 # 128×128
-variants/64x64/assets/customguimod/textures/gui/runes/  # 64×64
+assets/revolution/textures/gui/runes/                 # 128×128
+variants/64x64/assets/revolution/textures/gui/runes/  # 64×64
 ```
 
 Планируемая структура:
 
 ```text
-assets/customguimod/textures/gui/
+assets/revolution/textures/gui/
 ├─ runes/
 ├─ ranks/
 ├─ status/
