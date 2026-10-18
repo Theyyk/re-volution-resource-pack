@@ -7,7 +7,7 @@ $ErrorActionPreference = "Stop"
 Add-Type -AssemblyName System.Drawing
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
-$runesDir = Join-Path $repoRoot "assets\customguimod\textures\gui\runes"
+$runesDir = Join-Path $repoRoot "assets\revolution\textures\gui\runes"
 
 if (-not (Test-Path $runesDir)) {
     throw "Rune texture directory not found: $runesDir"
