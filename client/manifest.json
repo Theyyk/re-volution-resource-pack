@@ -1,0 +1,29 @@
+{
+  "productVersion": "1.0.0",
+  "developmentOnly": true,
+  "auth": {
+    "baseUrl": "http://127.0.0.1:25567/"
+  },
+  "java": {
+    "majorVersion": 8,
+    "provider": "adoptium"
+  },
+  "minecraft": {
+    "version": "1.12.2",
+    "forgeVersion": "14.23.5.2859",
+    "memoryMb": 4096
+  },
+  "server": {
+    "host": "127.0.0.1",
+    "port": 25566
+  },
+  "files": [
+    {
+      "path": "mods/RE-volution-1.3.2.jar",
+      "downloadUrl": "https://github.com/Theyyk/re-volution-mod/releases/download/v1.3.2/RE-volution-1.3.2.jar",
+      "sha256": "46624637e8d9c73947cef69ed9832a2f35f66abf81a647503254cd5a71a46d02",
+      "size": 364384,
+      "role": "gameplay-mod"
+    }
+  ]
+}
