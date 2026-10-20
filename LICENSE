@@ -1,13 +1,25 @@
-MIT License
+RE:volution Resource Pack licensing
 
 Copyright (c) 2026 Theyyk
 
+This repository uses split licensing.
+
+The MIT License below applies only to source code and tooling contained in:
+
+- .github/scripts/**
+- tools/**
+
+It does not apply to visual or game assets, including files under assets/**, variants/**, screenshots, previews, artwork, textures, icons, GUI images, or other media. Those materials are governed by ASSETS-LICENSE.md.
+
+MIT License
+
 Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+of the software and associated documentation files covered by this license
+(the "Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to permit
+persons to whom the Software is furnished to do so, subject to the following
+conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
