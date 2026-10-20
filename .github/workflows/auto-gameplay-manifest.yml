@@ -1,6 +1,12 @@
 name: Auto-rollout gameplay manifest
 
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/auto-gameplay-manifest.yml'
+      - '.github/scripts/update-gameplay-manifest.py'
+      - 'client/manifest.production.signed.json'
   schedule:
     - cron: '*/15 * * * *'
   workflow_dispatch:
@@ -9,11 +15,32 @@ permissions:
   contents: write
 
 concurrency:
-  group: auto-gameplay-manifest
+  group: auto-gameplay-manifest-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout resource-pack repository
+        uses: actions/checkout@v4
+        with:
+          path: pack
+
+      - name: Validate latest stable gameplay release against current manifest
+        id: prepare
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 pack/.github/scripts/update-gameplay-manifest.py \
+            --envelope pack/client/manifest.production.signed.json \
+            --output "$RUNNER_TEMP/manifest.production.json" \
+            --github-output "$GITHUB_OUTPUT"
+          echo "Latest stable gameplay version: ${{ steps.prepare.outputs.version }}"
+
   rollout:
+    if: github.event_name != 'pull_request'
+    needs: validate
     runs-on: ubuntu-latest
     steps:
       - name: Check signing key configuration
