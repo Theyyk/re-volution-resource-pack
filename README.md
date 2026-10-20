@@ -1,20 +1,26 @@
 # RE:volution Resource Pack — Minecraft 1.12.2
 
-Набор ресурсов игрового режима **RE:volution**: текстуры рун, которые загружаются отдельно от Java-кода основного Forge-мода.
+Официальный набор визуальных ресурсов RE:volution для Minecraft 1.12.2. Репозиторий содержит rune-текстуры, их варианты разрешения, документацию, release automation и production client-manifest hosting.
 
-**Текущая версия: `v1.1.0`**
+**Текущая версия Resource Pack: `v1.1.0`.**
 
-[Скачать набор ресурсов](https://github.com/Theyyk/re-volution-resource-pack/releases/tag/v1.1.0) · [Документация на русском](docs/README.md) · [Русские описания версий](docs/releases/README.md)
+[Скачать Resource Pack](https://github.com/Theyyk/re-volution-resource-pack/releases/tag/v1.1.0) · [Документация](docs/README.md) · [История версий](docs/releases/README.md)
+
+## Назначение
+
+Resource Pack отвечает только за визуальные ассеты. Игровая логика, ранги, состояние коллекций, экономика, Realm-модель и серверная авторитетность находятся в [RE:volution Mod](https://github.com/Theyyk/re-volution-mod).
+
+Текущий namespace rune-ассетов: `customguimod`.
 
 ## Возможности
 
 - 11 уникальных текстур для 26 фиксированных позиций первого статуса **Яд**.
-- Два варианта: **64×64** и **128×128**, с одинаковыми именами файлов и путями ресурсов.
-- Прозрачные PNG в формате RGBA с 8-битными каналами.
-- Minecraft **1.12.2**, формат набора ресурсов **3**, пространство имён `customguimod`.
-- Автоматическая проверка текстур и сборка двух ZIP-архивов.
-
-Набор содержит изображения рун. Геометрию интерфейса, ранги, состояние коллекции, покупку и пробуждение определяет основной мод.
+- Два варианта: **64×64** и **128×128** с одинаковыми путями и именами файлов.
+- Прозрачные PNG в RGBA с 8-битными каналами.
+- Minecraft **1.12.2**, Resource Pack format **3**.
+- Автоматическая валидация PNG, metadata и структуры.
+- Автоматическая сборка двух ZIP-вариантов.
+- Отдельная production manifest automation для доставки актуального stable gameplay JAR клиенту RE:volution.
 
 ## Совместимость
 
@@ -22,14 +28,23 @@
 |---|---|
 | Minecraft | `1.12.2` |
 | Forge | `14.23.5.2859` |
-| RE:volution Mod | Актуальная версия |
+| RE:volution Mod | актуальная стабильная версия |
 | RE:volution Resource Pack | `v1.1.0` |
 
-Resource Pack предназначен для актуальной версии [RE:volution Mod](https://github.com/Theyyk/re-volution-mod/releases/latest). Шрифты интерфейса и сведения об их источнике находятся в [репозитории мода](https://github.com/Theyyk/re-volution-mod/blob/main/docs/permissions/cristalix.md).
+Resource Pack предназначен для [актуальной стабильной версии RE:volution Mod](https://github.com/Theyyk/re-volution-mod/releases/latest).
+
+## Структура репозитория
+
+- `assets/customguimod/` — основной 128×128 набор ресурсов;
+- `variants/64x64/` — 64×64 вариант с той же структурой путей;
+- `docs/` — установка, каталог ресурсов, release notes и архивные материалы;
+- `.github/scripts/` — проверки и вспомогательная release/manifest automation;
+- `.github/workflows/` — CI, release build и production gameplay-manifest rollout;
+- `client/` — клиентские manifest-файлы, размещаемые в этом публичном distribution-репозитории.
 
 ## Предпросмотр ресурсов
 
-Ниже показаны **оба фактических варианта** набора ресурсов. Предпросмотр строится напрямую из PNG, которые входят в репозиторий, поэтому он не зависит от версии интерфейса основного мода и не требует отдельного обновления при изменениях GUI.
+Предпросмотр ниже строится напрямую из PNG, входящих в репозиторий.
 
 ### 64×64
 
@@ -63,29 +78,53 @@ Resource Pack предназначен для актуальной версии 
   <img src="assets/customguimod/textures/gui/runes/toxin_booster.png" width="128" height="128" alt="Toxin Booster 128x128">
 </p>
 
-Исторические GUI-скриншоты сохранены в [`docs/archive/screenshots/`](docs/archive/screenshots/), но больше не используются как актуальный preview Resource Pack.
+Исторические GUI-скриншоты сохранены в [`docs/archive/screenshots/`](docs/archive/screenshots/). Они не считаются актуальным preview интерфейса gameplay-мода.
 
-## Установка и запуск
+## Установка
 
-1. Установите [актуальную версию RE:volution Mod](https://github.com/Theyyk/re-volution-mod/releases/latest) на клиент и сервер с Forge 1.12.2.
-2. Скачайте **один** вариант из [релиза набора ресурсов v1.1.0](https://github.com/Theyyk/re-volution-resource-pack/releases/tag/v1.1.0):
+1. Установите [актуальную версию RE:volution Mod](https://github.com/Theyyk/re-volution-mod/releases/latest) с Forge 1.12.2.
+2. Скачайте **один** вариант из [релиза v1.1.0](https://github.com/Theyyk/re-volution-resource-pack/releases/tag/v1.1.0):
    - `re-volution-resource-pack-v1.1.0-64x64.zip`;
    - `re-volution-resource-pack-v1.1.0-128x128.zip`.
-3. Поместите ZIP без распаковки в папку `resourcepacks` используемого профиля Minecraft.
-4. Включите набор в настройках ресурсов. Другой набор с более высоким приоритетом может перекрывать эти текстуры.
-5. Запустите клиент, подключитесь к серверу и откройте интерфейс клавишей `C`.
+3. Поместите ZIP без распаковки в `resourcepacks` используемого профиля Minecraft.
+4. Включите набор в настройках ресурсов.
+5. Подключитесь к серверу и откройте gameplay GUI клавишей `C`.
 
-Выберите один вариант: при включении обоих Minecraft использует изображения из набора с более высоким приоритетом. Разрешение PNG не меняет размер слотов интерфейса.
+Если включено несколько Resource Pack, набор с более высоким приоритетом может перекрывать rune-текстуры. Разрешение PNG не меняет размер GUI-слотов.
 
-[Подробная установка и устранение проблем](docs/setup.md). Настройка сервера и MongoDB описана в [документации мода](https://github.com/Theyyk/re-volution-mod/blob/main/docs/setup.md).
+[Подробная установка и troubleshooting](docs/setup.md).
+
+## Сборка и CI
+
+CI проверяет исходные PNG и metadata, затем собирает два release ZIP с ожидаемой структурой. Release automation не должна изменять содержимое ассетов во время сборки: артефакты формируются из уже проверенных файлов репозитория.
+
+`main` является стабильной веткой. `develop` используется для подготовленных изменений Resource Pack перед продвижением в `main`.
+
+## Production gameplay manifest
+
+Репозиторий также размещает signed production manifest для RE:volution Client. Это distribution-инфраструктура, а не часть Minecraft Resource Pack.
+
+Workflow `Auto-rollout gameplay manifest`:
+
+1. каждые 15 минут и по ручному запуску проверяет последний stable GitHub Release `Theyyk/re-volution-mod`;
+2. скачивает точный gameplay JAR и вычисляет фактические SHA-256 и размер;
+3. изменяет только запись `gameplay-mod` в manifest payload;
+4. подписывает новый production manifest существующим доверенным ECDSA P-256/SHA-256 ключом через `ManifestSigner` из client-репозитория;
+5. проверяет подпись и публикует обновлённый `client/manifest.production.signed.json` в `main`.
+
+Приватный signing key хранится только как GitHub Secret и не должен попадать в репозиторий, логи или документацию.
 
 ## Документация
 
-[Оглавление](docs/README.md) содержит каталог рун, правила визуального набора, структуру ресурсов и процесс выпуска. Русская история хранится в `docs/releases/`, английские описания и ZIP-архивы — в [GitHub Releases](https://github.com/Theyyk/re-volution-resource-pack/releases).
+[docs/README.md](docs/README.md) содержит каталог рун, правила структуры, установку и release-процесс. Версионные документы хранятся в `docs/releases/`, опубликованные ZIP и release notes — в [GitHub Releases](https://github.com/Theyyk/re-volution-resource-pack/releases).
+
+README описывает текущее состояние репозитория, а release notes фиксируют конкретные версии.
 
 ## Лицензирование
 
 Репозиторий использует раздельное лицензирование:
 
 - служебный код и инструменты в `.github/scripts/**` и `tools/**` распространяются по [MIT License](LICENSE);
-- визуальные и игровые ассеты, включая `assets/**`, `variants/**`, текстуры, изображения интерфейса, скриншоты и другие медиа, защищены отдельной [RE:volution Asset License](ASSETS-LICENSE.md) и не разрешены для свободного копирования, модификации или распространения вне официального проекта RE:volution.
+- визуальные и игровые ассеты, включая `assets/**`, `variants/**`, текстуры, изображения интерфейса, скриншоты и другие медиа, защищены [RE:volution Asset License](ASSETS-LICENSE.md).
+
+Визуальные ассеты **не разрешены для свободного копирования, модификации, переиспользования или распространения вне официального проекта RE:volution без отдельного письменного разрешения**.
