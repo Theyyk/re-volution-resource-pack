@@ -5,6 +5,7 @@ import hashlib
 import json
 import re
 import sys
+import urllib.error
 import urllib.request
 from pathlib import Path
 
