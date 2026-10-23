@@ -1,6 +1,6 @@
 # RE:volution Resource Pack — Minecraft 1.12.2
 
-Официальный набор визуальных ресурсов RE:volution для Minecraft 1.12.2. Репозиторий содержит rune-текстуры, их варианты разрешения, документацию, release automation и production client-manifest hosting.
+Официальный набор визуальных ресурсов RE:volution для Minecraft 1.12.2. Репозиторий содержит rune-текстуры, их варианты разрешения, документацию, release automation и frozen legacy production manifest для старых launcher EXE.
 
 **Текущая версия Resource Pack: `v1.1.0`.**
 
@@ -20,7 +20,7 @@ Resource Pack отвечает только за визуальные ассет
 - Minecraft **1.12.2**, Resource Pack format **3**.
 - Автоматическая валидация PNG, metadata и структуры.
 - Автоматическая сборка двух ZIP-вариантов.
-- Отдельная production manifest automation для доставки актуального stable gameplay JAR клиенту RE:volution.
+- Frozen legacy production manifest для совместимости со старыми launcher EXE. Актуальный production manifest теперь принадлежит репозиторию RE:volution Client.
 
 ## Совместимость
 
@@ -38,9 +38,9 @@ Resource Pack предназначен для [актуальной стабил
 - `assets/customguimod/` — основной 128×128 набор ресурсов;
 - `variants/64x64/` — 64×64 вариант с той же структурой путей;
 - `docs/` — установка, каталог ресурсов, release notes и архивные материалы;
-- `.github/scripts/` — проверки и вспомогательная release/manifest automation;
-- `.github/workflows/` — CI, release build и production gameplay-manifest rollout;
-- `client/` — клиентские manifest-файлы, размещаемые в этом публичном distribution-репозитории.
+- `.github/scripts/` — проверки и вспомогательная release automation;
+- `.github/workflows/` — CI и Resource Pack release build;
+- `client/` — frozen legacy production manifest для совместимости со старыми launcher EXE; активный production manifest публикуется из RE:volution Client.
 
 ## Предпросмотр ресурсов
 
@@ -100,19 +100,15 @@ CI проверяет исходные PNG и metadata, затем собира�
 
 `main` является стабильной веткой. `develop` используется для подготовленных изменений Resource Pack перед продвижением в `main`.
 
-## Production gameplay manifest
+## Legacy production manifest
 
-Репозиторий также размещает signed production manifest для RE:volution Client. Это distribution-инфраструктура, а не часть Minecraft Resource Pack.
+`client/manifest.production.signed.json` сохранён как frozen legacy manifest для старых launcher EXE, которые продолжают обращаться к прежнему distribution URL.
 
-Workflow `Auto-rollout gameplay manifest`:
+Этот файл больше не участвует в активном production rollout и не обновляется при новых gameplay release.
 
-1. каждые 15 минут и по ручному запуску проверяет последний stable GitHub Release `Theyyk/re-volution-mod`;
-2. скачивает точный gameplay JAR и вычисляет фактические SHA-256 и размер;
-3. изменяет только запись `gameplay-mod` в manifest payload;
-4. подписывает новый production manifest существующим доверенным ECDSA P-256/SHA-256 ключом через `ManifestSigner` из client-репозитория;
-5. проверяет подпись и публикует обновлённый `client/manifest.production.signed.json` в `main`.
+Актуальный production manifest принадлежит репозиторию [RE:volution Client](https://github.com/Theyyk/re-volution-client) и публикуется как `manifest/manifest.production.signed.json`. Stable gameplay release из `RE:volution Mod` запускает Client-owned rollout через `repository_dispatch`, а периодическая проверка в Client остаётся fallback.
 
-Приватный signing key хранится только как GitHub Secret и не должен попадать в репозиторий, логи или документацию.
+Resource Pack repository больше не подписывает и не публикует новые production gameplay manifest.
 
 ## Документация
 
