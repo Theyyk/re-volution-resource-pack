@@ -7,6 +7,8 @@ on:
       - '.github/workflows/auto-gameplay-manifest.yml'
       - '.github/scripts/update-gameplay-manifest.py'
       - 'client/manifest.production.signed.json'
+  repository_dispatch:
+    types: [gameplay-release]
   schedule:
     - cron: '*/15 * * * *'
   workflow_dispatch:
